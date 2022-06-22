@@ -24,15 +24,28 @@ class MainWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Align(
-            alignment: Alignment.topRight,
-            child: Text(
-              '₩298,000',
-              style: TextStyle(
-                fontSize: 150,
-                color: Color(0xFF008db5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  '₩',
+                  style: TextStyle(
+                    fontSize: 100,
+                    color: Color(0xFF008db5),
+                  ),
+                ),
               ),
-            ),
+              Text(
+                '298,000',
+                style: TextStyle(
+                  fontSize: 150,
+                  color: Color(0xFF008db5),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -6,7 +6,7 @@ class PriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 113,
+      height: 120,
       color: const Color(0xff021964),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

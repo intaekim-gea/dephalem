@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class PreviewController extends GetxController
+class CameraControllerWeb extends GetxController
     with StateMixin<CameraController> {
   CameraController get controller => value!;
 
@@ -19,7 +18,7 @@ class PreviewController extends GetxController
       final cameras = await availableCameras();
       final controller = CameraController(cameras[0], ResolutionPreset.max);
       await controller.initialize();
-      startCapture();
+      // startCapture();
       return controller;
     } catch (e) {
       rethrow;
@@ -28,19 +27,9 @@ class PreviewController extends GetxController
 
   void startCapture() {
     Timer(const Duration(seconds: 2), () async {
-      final file = await controller.takePicture();
+      // final file = await controller.takePicture();
+      // final bytes = await file.readAsBytes();
       startCapture();
     });
   }
-}
-
-class PreviewWidget extends StatelessWidget {
-  final PreviewController controller;
-
-  const PreviewWidget(this.controller, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => controller.obx(
-        (state) => CameraPreview(controller.controller),
-      );
 }

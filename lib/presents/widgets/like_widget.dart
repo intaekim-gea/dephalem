@@ -8,8 +8,11 @@ class LikeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Lottie.asset('assets/lotties/6523-like.json'),
-        const SizedBox(width: 10),
+        SizedBox(
+            width: 130,
+            height: 130,
+            child: Lottie.asset('assets/lotties/lf30_editor_7qj5ddd1.json')),
+        const SizedBox(width: 0),
         const Text(
           '355',
           style: TextStyle(

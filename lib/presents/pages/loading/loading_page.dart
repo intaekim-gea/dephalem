@@ -7,7 +7,7 @@ class LoadingPageController extends GetxController {}
 
 class LoadingPage extends StatelessWidget {
   static const name = '/loading';
-  
+
   const LoadingPage({Key? key}) : super(key: key);
 
   @override

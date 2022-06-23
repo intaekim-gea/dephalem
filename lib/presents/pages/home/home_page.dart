@@ -21,19 +21,18 @@ class HomePageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (goodsController.state != null) {
+    goodsController.fetch().then((value) async {
+      await cameraController.setupCamera();
       _setupValues();
-    } else {
-      goodsController.addListener(() => _setupValues());
-    }
-    cameraController.setupCamera();
+    });
   }
 
   void _setupValues() {
     ever(selectedGood, ((Good selectedGood) {
       mainWidgetController.setGood(selectedGood);
+      chartController.setGood(selectedGood);
     }));
-    selectedGood.value = goodsController.goods.shoe;
+    selectedGood.value = goodsController.goods.value.shoe;
   }
 }
 
@@ -46,26 +45,27 @@ class HomePage extends GetView<HomePageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: controller.goodsController.obx(
-          (state) => Stack(
-            children: [
-              // PreviewWidget(controller.cameraController),
-              SizedBox.expand(
-                  child: TextButton(onPressed: () {}, child: const Text(''))),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MainWidget(controller.mainWidgetController),
-                  const SizedBox(
-                    width: double.infinity,
-                    height: 120,
-                    child: LineChartWidget(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          onLoading: Container(),
+        child: Stack(
+          children: [
+            // PreviewWidget(controller.cameraController),
+            SizedBox.expand(
+                child: TextButton(
+                    onPressed: () {
+                      controller.cameraController.capture();
+                    },
+                    child: const Text(''))),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MainWidget(controller.mainWidgetController),
+                const SizedBox(
+                  width: double.infinity,
+                  height: 120,
+                  child: LineChartWidget(),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

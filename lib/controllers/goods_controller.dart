@@ -5,14 +5,18 @@ import 'package:get/get.dart';
 
 import '../models/goods.dart';
 
-class GoodsController extends GetxController with StateMixin<Goods> {
-  final connect = GetConnect();
-  Goods get goods => value!;
+class GoodsController extends GetxController {
+  final connect = Get.find<GetConnect>();
+  final goods = Goods(
+    shoe: Good(name: '', price: [], popularity: []),
+    pokemon: Good(name: '', price: [], popularity: []),
+    favorites: [],
+  ).obs;
 
   @override
   void onInit() {
     super.onInit();
-    append(() => fetch);
+    fetch().then((value) => goods.value = value);
   }
 
   Future<Goods> fetch() async {

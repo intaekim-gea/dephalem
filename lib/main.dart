@@ -10,6 +10,7 @@ import 'presents/platforms/utilities_desktop.dart'
 import 'presents/pages/home/home_page.dart';
 
 void locator() {
+  Get.put(GetConnect(), permanent: true);
   Get.put(GoodsController(), permanent: true);
   Get.put(LineChartController(), permanent: true);
 }

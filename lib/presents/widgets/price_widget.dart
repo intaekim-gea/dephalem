@@ -7,7 +7,7 @@ class PriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 120,
-      color: const Color(0xff021964),
+      color: const Color(0xff031e64),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

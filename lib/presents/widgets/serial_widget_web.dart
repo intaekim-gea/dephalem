@@ -9,31 +9,37 @@ class SerialWidget extends StatelessWidget {
   const SerialWidget(this.controller, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => controller.obx(
-        (state) => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: ListView(
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Obx(
+              () => ListView(
                 padding: const EdgeInsets.all(8),
                 children: controller.received.map((e) => Text(e)).toList(),
               ),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              child: const Text('Send'),
-              onPressed: () {
-                controller.writeToPort();
-              },
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              child: const Text('Receive'),
-              onPressed: () {
-                controller.readFromPort();
-              },
-            ),
-          ],
-        ),
+          ),
+          ElevatedButton(
+            child: const Text('Open Port'),
+            onPressed: () {
+              controller.openPort();
+            },
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            child: const Text('Send'),
+            onPressed: () {
+              controller.writeToPort();
+            },
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            child: const Text('Receive'),
+            onPressed: () {
+              controller.readFromPort();
+            },
+          ),
+        ],
       );
 }

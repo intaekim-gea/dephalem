@@ -1,5 +1,6 @@
 import 'package:dephalem/controllers/goods_controller.dart';
 import 'package:dephalem/presents/pages/chart/line_chart_page.dart';
+import 'package:dephalem/presents/pages/loading/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
               name: LineChartPage.name,
               page: () => const LineChartPage(),
               binding: BindingsBuilder.put(() => LineChartController())),
+          GetPage(
+              name: LoadingPage.name,
+              page: () => const LoadingPage(),
+              binding: BindingsBuilder.put(() => LoadingPageController())),
           createPreviewPage('/preview'),
           createSerialPage('/serial'),
         ],

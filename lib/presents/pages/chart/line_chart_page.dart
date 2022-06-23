@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -10,5 +11,5 @@ class LineChartPage extends GetView<LineChartController> {
   const LineChartPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => LineChartWidget();
+  Widget build(BuildContext context) => Center(child: SizedBox(height: 150, child: LineChartWidget()));
 }

@@ -40,7 +40,7 @@ class LineChartC extends GetxController {
         ),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
+            showTitles: false,
             reservedSize: 30,
             interval: 1,
             getTitlesWidget: bottomTitleWidgets,
@@ -82,7 +82,7 @@ class LineChartC extends GetxController {
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: FlDotData(
-            show: false,
+            show: true,
           ),
           belowBarData: BarAreaData(
             show: true,
@@ -121,7 +121,7 @@ class LineChartC extends GetxController {
         },
       ),
       titlesData: FlTitlesData(
-        show: true,
+        show: false,
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
@@ -261,24 +261,14 @@ class LineChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        AspectRatio(
-          aspectRatio: 1.70,
-          child: Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(18),
-                ),
-                color: Color(0xff232d37)),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  right: 18.0, left: 12.0, top: 24, bottom: 12),
-              child: Obx(
-                () => LineChart(
-                  controller.showAvg.value
-                      ? controller.avgData()
-                      : controller.mainData(),
-                ),
-              ),
+        Container(
+          decoration: const BoxDecoration(
+              color: Color(0xff232d37)),
+          child: Obx(
+            () => LineChart(
+              controller.showAvg.value
+                  ? controller.avgData()
+                  : controller.mainData(),
             ),
           ),
         ),

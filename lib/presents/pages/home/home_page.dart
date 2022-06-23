@@ -1,4 +1,5 @@
 import 'package:dephalem/controllers/camera_controller_web.dart';
+import 'package:dephalem/presents/widgets/bag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,6 +55,7 @@ class HomePage extends GetView<HomePageController> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // BagWidget(controller.mainWidgetController),
                   MainWidget(controller.mainWidgetController),
                   const SizedBox(
                     width: double.infinity,

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 
 import '../models/goods.dart';
@@ -23,7 +24,12 @@ class GoodsController extends GetxController with StateMixin<Goods> {
     if (goods != null) {
       return goods;
     } else {
-      return fetch();
+      return await _createDefault();
     }
   }
+}
+
+Future<Goods> _createDefault() async {
+  final string = await rootBundle.loadString('assets/default.json');
+  return goodsFromJson(string);
 }

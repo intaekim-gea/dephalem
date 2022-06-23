@@ -1,9 +1,9 @@
-import 'package:dephalem/controllers/goods_controller.dart';
-import 'package:dephalem/presents/pages/chart/line_chart_page.dart';
-import 'package:dephalem/presents/pages/loading/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'controllers/goods_controller.dart';
+import 'controllers/line_chart_controller.dart';
+import 'presents/pages/loading/loading_page.dart';
 import 'presents/platforms/utilities_desktop.dart'
     if (dart.library.html) 'presents/platforms/utilities_web.dart';
 
@@ -11,6 +11,7 @@ import 'presents/pages/home/home_page.dart';
 
 void locator() {
   Get.put(GoodsController(), permanent: true);
+  Get.put(LineChartController(), permanent: true);
 }
 
 void main() async {
@@ -33,17 +34,20 @@ class MyApp extends StatelessWidget {
         initialRoute: HomePage.name,
         getPages: [
           GetPage(
-              name: HomePage.name,
-              page: () => const HomePage(),
-              binding: BindingsBuilder.put(() => HomePageController())),
+            name: HomePage.name,
+            page: () => const HomePage(),
+            binding: BindingsBuilder.put(() => HomePageController()),
+            transition: Transition.fade,
+            transitionDuration: const Duration(seconds: 1),
+          ),
           GetPage(
-              name: LineChartPage.name,
-              page: () => const LineChartPage(),
-              binding: BindingsBuilder.put(() => LineChartController())),
-          GetPage(
-              name: LoadingPage.name,
-              page: () => const LoadingPage(),
-              binding: BindingsBuilder.put(() => LoadingPageController())),
+            name: LoadingPage.name,
+            page: () => const LoadingPage(),
+            binding: BindingsBuilder.put(() {
+              final route = Get.arguments?['route'] ?? HomePage.name;
+              return LoadingPageController(route);
+            }),
+          ),
           createPreviewPage('/preview'),
           createSerialPage('/serial'),
         ],

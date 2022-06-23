@@ -1,17 +1,20 @@
+import 'package:dephalem/controllers/camera_controller_web.dart';
+import 'package:dephalem/presents/widgets/preview_widget_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/goods_controller.dart';
+import '../../../controllers/line_chart_controller.dart';
 import '../../../models/goods.dart';
+import '../../widgets/line_chart_widget.dart';
 import '../../widgets/main_widget.dart';
 import '../../widgets/main_widget_controller.dart';
-import '../../widgets/price_widget.dart';
-import '../../widgets/price_widget_controller.dart';
 
 class HomePageController extends GetxController {
+  final cameraController = Get.put(CameraControllerWeb());
   final goodsController = Get.find<GoodsController>();
   final mainWidgetController = MainWidgetController();
-  final priceWidgetController = PriceWidgetController();
+  final chartController = Get.find<LineChartController>();
 
   final selectedGood = Good(name: '', price: [], popularity: []).obs;
 
@@ -23,6 +26,7 @@ class HomePageController extends GetxController {
     } else {
       goodsController.addListener(() => _setupValues());
     }
+    cameraController.setupCamera();
   }
 
   void _setupValues() {
@@ -43,13 +47,25 @@ class HomePage extends GetView<HomePageController> {
     return Scaffold(
       body: Center(
         child: controller.goodsController.obx(
-          (state) => Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          (state) => Stack(
             children: [
-              MainWidget(controller.mainWidgetController),
-              PriceWidget(controller.priceWidgetController),
+              // PreviewWidget(controller.cameraController),
+              SizedBox.expand(
+                  child: TextButton(onPressed: () {}, child: const Text(''))),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MainWidget(controller.mainWidgetController),
+                  const SizedBox(
+                    width: double.infinity,
+                    height: 120,
+                    child: LineChartWidget(),
+                  ),
+                ],
+              ),
             ],
           ),
+          onLoading: Container(),
         ),
       ),
     );

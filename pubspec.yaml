@@ -93,5 +93,7 @@ flutter:
         - asset: assets/fonts/LEMONMILK-BoldItalic.otf
           weight: 700
           style: italic
+    - family: GoudyBookLetter
+      fonts:
         - asset: assets/fonts/goudy_bookletter_1911.otf
           weight: 500

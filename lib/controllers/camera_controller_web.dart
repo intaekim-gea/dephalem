@@ -45,24 +45,27 @@ class CameraControllerWeb extends GetxController
       'uploadFile': dio.MultipartFile.fromBytes(bytes),
     });
 
+    final goodsController = Get.find<GoodsController>();
+    final homeController = Get.find<HomePageController>();
+    homeController.beingProcess.value = true;
     try {
       var response = await client.post<String>(
         'http://192.168.1.65:3333/classify/',
         data: formData,
       );
+      homeController.beingProcess.value = false;
       if (response.data != null) {
         final model = modelFromJson(response.data!);
         // if (model.data.prediction == 'bag') {
-        final goodsController = Get.find<GoodsController>();
-        final homeController = Get.find<HomePageController>();
         homeController.selectedGood.value = goodsController.goods.value.bag;
         // }
         print(response.data.toString());
       }
     } catch (e) {
-      final goodsController = Get.find<GoodsController>();
-      final homeController = Get.find<HomePageController>();
-      homeController.selectedGood.value = goodsController.goods.value.bag;
+      Future.delayed(Duration(seconds: 3), () {
+        homeController.beingProcess.value = false;
+        homeController.selectedGood.value = goodsController.goods.value.bag;
+      });
     }
   }
 

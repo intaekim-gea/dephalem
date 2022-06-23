@@ -9,6 +9,7 @@ import '../../../models/goods.dart';
 import '../../widgets/line_chart_widget.dart';
 import '../../widgets/main_widget.dart';
 import '../../widgets/main_widget_controller.dart';
+import '../../widgets/progress_widget.dart';
 
 class HomePageController extends GetxController {
   final cameraController = Get.put(CameraControllerWeb());
@@ -17,6 +18,7 @@ class HomePageController extends GetxController {
   final chartController = Get.find<LineChartController>();
 
   final selectedGood = Good(name: '', price: [], popularity: []).obs;
+  final beingProcess = false.obs;
 
   @override
   void onInit() {
@@ -52,17 +54,35 @@ class HomePage extends GetView<HomePageController> {
           child: Stack(
             children: [
               // PreviewWidget(controller.cameraController),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // BagWidget(controller.mainWidgetController),
-                  MainWidget(controller.mainWidgetController),
-                  const SizedBox(
-                    width: double.infinity,
-                    height: 120,
-                    child: LineChartWidget(),
-                  ),
-                ],
+              Obx(
+                () {
+                  if (controller.beingProcess.value == true) {
+                    return Container(
+                      color: Colors.black,
+                      child: const ProgressWidget(),
+                    );
+                  }
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // BagWidget(controller.mainWidgetController),
+                      Obx(() {
+                        bool isBag = controller.selectedGood.value.name ==
+                            controller.goodsController.goods.value.bag.name;
+                        if (isBag) {
+                          return BagWidget(controller.mainWidgetController);
+                        } else {
+                          return MainWidget(controller.mainWidgetController);
+                        }
+                      }),
+                      const SizedBox(
+                        width: double.infinity,
+                        height: 120,
+                        child: LineChartWidget(),
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),

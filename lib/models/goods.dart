@@ -37,17 +37,17 @@ class Goods {
 class Good {
   Good({
     required this.name,
-    required this.goods,
+    required this.price,
     required this.popularity,
   });
 
   final String name;
-  final List<double> goods;
+  final List<double> price;
   final List<double> popularity;
 
   factory Good.fromJson(Map<String, dynamic> json) => Good(
         name: json['name'],
-        goods: List<double>.from(json['price'].map((x) => x)),
+        price: List<double>.from(json['price'].map((x) => x)),
         popularity: List<double>.from(json['popularity'].map(
           (x) => x.toDouble(),
         )),
@@ -55,7 +55,7 @@ class Good {
 
   Map<String, dynamic> toJson() => {
         'name': name,
-        'price': List<dynamic>.from(goods.map((x) => x)),
+        'price': List<dynamic>.from(price.map((x) => x)),
         'popularity': List<dynamic>.from(popularity.map((x) => x)),
       };
 }

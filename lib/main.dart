@@ -1,3 +1,4 @@
+import 'package:dephalem/controllers/goods_controller.dart';
 import 'package:dephalem/presents/pages/chart/line_chart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,9 +8,14 @@ import 'presents/platforms/utilities_desktop.dart'
 
 import 'presents/pages/home/home_page.dart';
 
+void locator() {
+  Get.put(GoodsController(), permanent: true);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setMinWindowSize();
+  locator();
   runApp(const MyApp());
 }
 
@@ -23,7 +29,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'LEMONMILK',
           primarySwatch: Colors.blue,
         ),
-        initialRoute: '/serial', //HomePage.name,
+        initialRoute: HomePage.name,
         getPages: [
           GetPage(
               name: HomePage.name,

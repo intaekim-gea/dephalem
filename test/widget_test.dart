@@ -8,8 +8,10 @@
 import 'package:dephalem/controllers/goods_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() async {
-  GoodsController controller = GoodsController();
-  await controller.fetch();
-  expect(controller.goods.value.favorites.length, isNot(0));
+void main() {
+  test('Counter value should be incremented', () async {
+    GoodsController controller = GoodsController();
+    final goods = await controller.fetch();
+    expect(goods.favorites.length, isNot(0));
+  });
 }

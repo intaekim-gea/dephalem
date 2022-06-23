@@ -41,7 +41,7 @@ class PriceWidget extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      '${controller.price.value}',
+                      controller.price.value,
                       style: const TextStyle(
                         color: Color(0xff94a4cc),
                         fontWeight: FontWeight.w300,
@@ -51,7 +51,7 @@ class PriceWidget extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  '${controller.delta}',
+                  controller.delta.value,
                   style: const TextStyle(
                     color: Color(0xff94a4cc),
                     fontWeight: FontWeight.w300,

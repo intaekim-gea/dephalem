@@ -1,7 +1,13 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:dephalem/controllers/goods_controller.dart';
+import 'package:dephalem/presents/pages/home/home_page.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+
+import '../models/model.dart';
 
 class CameraControllerWeb extends GetxController
     with StateMixin<CameraController> {
@@ -29,41 +35,28 @@ class CameraControllerWeb extends GetxController
     final file = await controller.takePicture();
     final bytes = await file.readAsBytes();
 
-    try {
-      final multiPart = MultipartFile(bytes, filename: 'avatar.png');
-      final form = FormData({
-        'uploadFile': bytes,
-      });
-      final respons = await connect.post<String>(
-        'http://192.168.1.65:3333/classify/',
-        form,
-        // contentType: 'multipart/form-data',
-      );
+    _sendImageDio(bytes);
+  }
 
-// MultipartFile f =
-//         MultipartFile(await file.readAsBytes(), filename: 'avatar.png');
-//     FormData form = FormData({
-//       'name': pet.name,
-//       'gender': pet.gender,
-//       'birthday': pet.birthday,
-//       'type': pet.type,
-//       'want_marraige': pet.wantMarraige,
-//       if (pet.breed != null) 'breed': pet.breed,
-//       'file': f,
-//     });
+  void _sendImageDio(Uint8List bytes) async {
+    var client = dio.Dio();
 
-//     return post(
-//       '/create/',
-//       form,
-//       headers: headers,
-//       contentType: "multipart/form-data",
-//     );
-
-      print('object');
-    } catch (e) {
-      print('$e');
+    var formData = dio.FormData.fromMap({
+      'uploadFile': dio.MultipartFile.fromBytes(bytes),
+    });
+    var response = await client.post<String>(
+      'http://192.168.1.65:3333/classify/',
+      data: formData,
+    );
+    if (response.data != null) {
+      final model = modelFromJson(response.data!);
+      // if (model.data.prediction == 'bag') {
+      final goodsController = Get.find<GoodsController>();
+      final homeController = Get.find<HomePageController>();
+      homeController.selectedGood.value = goodsController.goods.value.bag;
+      // }
     }
-    print('object');
+    print(response.data.toString());
   }
 
   void startCapture() {

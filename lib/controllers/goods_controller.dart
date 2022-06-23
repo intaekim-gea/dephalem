@@ -9,8 +9,7 @@ class GoodsController extends GetxController {
   final connect = Get.find<GetConnect>();
   final goods = Goods(
     shoe: Good(name: '', price: [], popularity: []),
-    pokemon: Good(name: '', price: [], popularity: []),
-    favorites: [],
+    bag: Good(name: '', price: [], popularity: []),
   ).obs;
 
   @override

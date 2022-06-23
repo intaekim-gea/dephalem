@@ -1,5 +1,4 @@
 import 'package:dephalem/controllers/camera_controller_web.dart';
-import 'package:dephalem/presents/widgets/preview_widget_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,29 +42,28 @@ class HomePage extends GetView<HomePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Stack(
-          children: [
-            // PreviewWidget(controller.cameraController),
-            SizedBox.expand(
-                child: TextButton(
-                    onPressed: () {
-                      controller.cameraController.capture();
-                    },
-                    child: const Text(''))),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MainWidget(controller.mainWidgetController),
-                const SizedBox(
-                  width: double.infinity,
-                  height: 120,
-                  child: LineChartWidget(),
-                ),
-              ],
-            ),
-          ],
+    return GestureDetector(
+      onTapUp: (tabupDetail) {
+        controller.cameraController.capture();
+      },
+      child: Scaffold(
+        body: Center(
+          child: Stack(
+            children: [
+              // PreviewWidget(controller.cameraController),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MainWidget(controller.mainWidgetController),
+                  const SizedBox(
+                    width: double.infinity,
+                    height: 120,
+                    child: LineChartWidget(),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

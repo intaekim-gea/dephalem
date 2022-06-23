@@ -11,26 +11,20 @@ String goodsToJson(Goods data) => json.encode(data.toJson());
 class Goods {
   Goods({
     required this.shoe,
-    required this.pokemon,
-    required this.favorites,
+    required this.bag,
   });
 
   final Good shoe;
-  final Good pokemon;
-  final List<Good> favorites;
+  final Good bag;
 
   factory Goods.fromJson(Map<String, dynamic> json) => Goods(
         shoe: Good.fromJson(json['shoe']),
-        pokemon: Good.fromJson(json['pokemon']),
-        favorites: List<Good>.from(
-          json['favorites'].map((x) => Good.fromJson(x)),
-        ),
+        bag: Good.fromJson(json['bag']),
       );
 
   Map<String, dynamic> toJson() => {
         'shoe': shoe.toJson(),
-        'pokemon': pokemon.toJson(),
-        'favorites': List<dynamic>.from(favorites.map((x) => x.toJson())),
+        'bag': bag.toJson(),
       };
 }
 
@@ -42,16 +36,22 @@ class Good {
   });
 
   final String name;
-  final List<double> price;
+  final List<int> price;
   final List<double> popularity;
 
-  factory Good.fromJson(Map<String, dynamic> json) => Good(
-        name: json['name'],
-        price: List<double>.from(json['price'].map((x) => x)),
-        popularity: List<double>.from(json['popularity'].map(
-          (x) => x.toDouble(),
-        )),
-      );
+  factory Good.fromJson(Map<String, dynamic> json) {
+    final price = List<int>.from(json['price'].map((x) => x));
+    final popularity = List<double>.from(json['popularity'].map(
+      (x) => x.toDouble(),
+    ));
+    return Good(
+      name: json['name'],
+      price: List<int>.from(json['price'].map((x) => x)),
+      popularity: List<double>.from(json['popularity'].map(
+        (x) => x.toDouble(),
+      )),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'name': name,

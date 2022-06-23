@@ -1,3 +1,4 @@
+import 'package:dephalem/presents/pages/chart/line_chart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,12 +23,16 @@ class MyApp extends StatelessWidget {
           fontFamily: 'LEMONMILK',
           primarySwatch: Colors.blue,
         ),
-        initialRoute: HomePage.name,
+        initialRoute: LineChartPage.name,
         getPages: [
           GetPage(
               name: HomePage.name,
               page: () => const HomePage(),
               binding: BindingsBuilder.put(() => HomePageController())),
+          GetPage(
+              name: LineChartPage.name,
+              page: () => const LineChartPage(),
+              binding: BindingsBuilder.put(() => LineChartController())),
           createPreviewPage('/preview'),
           createSerialPage('/serial'),
         ],

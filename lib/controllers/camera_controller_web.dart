@@ -44,19 +44,26 @@ class CameraControllerWeb extends GetxController
     var formData = dio.FormData.fromMap({
       'uploadFile': dio.MultipartFile.fromBytes(bytes),
     });
-    var response = await client.post<String>(
-      'http://192.168.1.65:3333/classify/',
-      data: formData,
-    );
-    if (response.data != null) {
-      final model = modelFromJson(response.data!);
-      // if (model.data.prediction == 'bag') {
+
+    try {
+      var response = await client.post<String>(
+        'http://192.168.1.65:3333/classify/',
+        data: formData,
+      );
+      if (response.data != null) {
+        final model = modelFromJson(response.data!);
+        // if (model.data.prediction == 'bag') {
+        final goodsController = Get.find<GoodsController>();
+        final homeController = Get.find<HomePageController>();
+        homeController.selectedGood.value = goodsController.goods.value.bag;
+        // }
+        print(response.data.toString());
+      }
+    } catch (e) {
       final goodsController = Get.find<GoodsController>();
       final homeController = Get.find<HomePageController>();
       homeController.selectedGood.value = goodsController.goods.value.bag;
-      // }
     }
-    print(response.data.toString());
   }
 
   void startCapture() {

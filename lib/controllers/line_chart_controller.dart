@@ -19,8 +19,8 @@ class LineChartController extends GetxController {
 }
 
 final List<Color> gradientColors = [
-  const Color(0xff23b6e6),
   const Color(0xff02d39a),
+  const Color(0xffff4500),
 ];
 
 LineChartData _mainData() {
@@ -55,21 +55,26 @@ LineChartData _mainData() {
     ),
     borderData: FlBorderData(
         show: true,
-        border: Border.all(color: const Color(0xff37434d), width: 1)),
+        border: Border.all(color: const Color(0xff000000), width: 1)),
     minX: 0,
     maxX: 11,
     minY: 0,
-    maxY: 6,
+    maxY: 8,
     lineBarsData: [
       LineChartBarData(
         spots: const [
-          FlSpot(0, 3),
-          FlSpot(2.6, 2),
-          FlSpot(4.9, 5),
-          FlSpot(6.8, 3.1),
-          FlSpot(8, 4),
-          FlSpot(9.5, 3),
-          FlSpot(11, 4),
+          FlSpot(0, 4),
+          FlSpot(1, 4),
+          FlSpot(2, 2),
+          FlSpot(3, 5),
+          FlSpot(4, 3.1),
+          FlSpot(5, 5.2),
+          FlSpot(6, 4),
+          FlSpot(7, 6),
+          FlSpot(8, 6.5),
+          FlSpot(9, 5.4),
+          FlSpot(10, 5),
+          FlSpot(11, 6.5)
         ],
         isCurved: false,
         gradient: LinearGradient(
@@ -77,8 +82,8 @@ LineChartData _mainData() {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
-        barWidth: 5,
-        isStrokeCapRound: true,
+        barWidth: 2,
+        isStrokeCapRound: false,
         dotData: FlDotData(
           show: true,
         ),
@@ -129,7 +134,7 @@ LineChartData _avgData() {
     ),
     borderData: FlBorderData(
         show: true,
-        border: Border.all(color: const Color(0xff37434d), width: 1)),
+        border: Border.all(color: const Color(0xff000000), width: 1)),
     minX: 0,
     maxX: 11,
     minY: 0,
@@ -156,7 +161,7 @@ LineChartData _avgData() {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
-        barWidth: 5,
+        barWidth: 2,
         isStrokeCapRound: true,
         dotData: FlDotData(
           show: false,
@@ -213,20 +218,21 @@ Widget bottomTitleWidgets(double value, TitleMeta meta) {
 Widget leftTitleWidgets(double value, TitleMeta meta) {
   const style = TextStyle(
     color: Color(0xff67727d),
-    fontWeight: FontWeight.bold,
-    fontSize: 15,
+    fontWeight: FontWeight.normal,
+    fontSize: 11,
   );
   String text;
   switch (value.toInt()) {
     case 1:
-      text = '10K';
+      text = '\$00.0';
       break;
     case 3:
-      text = '30k';
+      text = '\$50.0';
       break;
     case 5:
-      text = '50k';
+      text = '\$100.0';
       break;
+    case 7:
     default:
       return Container();
   }

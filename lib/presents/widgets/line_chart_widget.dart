@@ -12,7 +12,7 @@ class LineChartWidget extends GetView<LineChartController> {
     return Stack(
       children: <Widget>[
         Container(
-          decoration: const BoxDecoration(color: Color(0xff232d37)),
+          decoration: const BoxDecoration(color: Colors.black),
           child: Obx(
             () => LineChart(
               controller.lineChartData.value,

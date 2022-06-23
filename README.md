@@ -1,2 +1,2 @@
-# dephalem
-Flutter Application for de Phalem
+# depahlem
+Flutter Application for de Pahlem

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'LEMONMILK',
           primarySwatch: Colors.blue,
         ),
-        initialRoute: LineChartPage.name,
+        initialRoute: '/serial', //HomePage.name,
         getPages: [
           GetPage(
               name: HomePage.name,

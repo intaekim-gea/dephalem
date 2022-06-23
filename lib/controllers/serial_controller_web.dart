@@ -11,15 +11,18 @@ class SerialControllerWeb extends GetxController {
   final received = <String>[].obs;
 
   Future<bool> openPort() async {
-    if (this.port != null) {
+    if (port != null) {
       return true;
     }
 
-    final port = await window.navigator.serial.requestPort();
-    await port.open(SerialOptions(baudRate: 9600));
-    this.port = port;
-
-    return true;
+    try {
+      final port = await window.navigator.serial.requestPort();
+      await port.open(SerialOptions(baudRate: 9600));
+      this.port = port;
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   Future<void> writeToPort() async {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'price_widget_controller.dart';
+
 class PriceWidget extends StatelessWidget {
-  const PriceWidget({Key? key}) : super(key: key);
+  final PriceWidgetController controller;
+  const PriceWidget(this.controller, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +14,11 @@ class PriceWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 49),
+          Padding(
+            padding: const EdgeInsets.only(left: 49),
             child: Text(
-              'AIR JORDAN 4 MILITARY BLACK',
-              style: TextStyle(
+              controller.name.value,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
                 fontSize: 30,
@@ -37,9 +40,9 @@ class PriceWidget extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    const Text(
-                      '328,000',
-                      style: TextStyle(
+                    Text(
+                      '${controller.price.value}',
+                      style: const TextStyle(
                         color: Color(0xff94a4cc),
                         fontWeight: FontWeight.w300,
                         fontSize: 30,
@@ -47,9 +50,9 @@ class PriceWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  '-2,000',
-                  style: TextStyle(
+                Text(
+                  '${controller.delta}',
+                  style: const TextStyle(
                     color: Color(0xff94a4cc),
                     fontWeight: FontWeight.w300,
                     fontSize: 20,
